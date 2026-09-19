@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dhdm8lhvgrcg"]
 
 [ext_resource type="Texture2D" uid="uid://buefnlcrhw34i" path="res://icon.svg" id="1_myinc"]
-[ext_resource type="Script" uid="uid://bk8p2faw34wsk" path="res://car.gd" id="2_njov2"]
+[ext_resource type="PackedScene" uid="uid://duq45g0wsaw82" path="res://car.tscn" id="2_njov2"]
+[ext_resource type="PackedScene" uid="uid://chfiw031xnt1q" path="res://slingshot.glb" id="3_sling"]
+[ext_resource type="Script" uid="uid://df2w4b2bvpljp" path="res://slingshot_rig.gd" id="4_rig"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njov2"]
 albedo_texture = ExtResource("1_myinc")
@@ -45,18 +47,6 @@ sky_material = SubResource("ProceduralSkyMaterial_rvu7i")
 background_mode = 2
 sky = SubResource("Sky_rvu7i")
 
-[sub_resource type="BoxMesh" id="BoxMesh_n8i4t"]
-size = Vector3(1, 0.35028076, 1.7783203)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2au82"]
-points = PackedVector3Array(0.5, 0.17514038, 0.88916016, 0.5, -0.17514038, 0.88916016, 0.5, 0.17514038, -0.88916016, -0.5, 0.17514038, 0.88916016, -0.5, -0.17514038, 0.88916016, 0.5, -0.17514038, -0.88916016, -0.5, 0.17514038, -0.88916016, -0.5, -0.17514038, -0.88916016)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_osore"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.15
-radial_segments = 12
-
 [node name="Node3D" type="Node3D" unique_id=1106136574]
 
 [node name="Map" type="MeshInstance3D" parent="." unique_id=877170300]
@@ -65,7 +55,7 @@ material_override = SubResource("StandardMaterial3D_njov2")
 mesh = SubResource("BoxMesh_oq8uu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map" unique_id=1891343833]
-transform = Transform3D(-0.02, 0, -1.7484555e-09, 0, 1, 0, 1.7484555e-09, 0, -0.02, -0.08524986, 0.9751084, 0.21909064)
+transform = Transform3D(-8.7422775e-10, 0, 0.02, 0, 1, 0, -0.02, 0, -8.7422775e-10, -0.038820114, 0.9751084, -0.04773218)
 mesh = SubResource("PrismMesh_oq8uu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map/MeshInstance3D" unique_id=1860288797]
@@ -74,7 +64,7 @@ mesh = SubResource("PrismMesh_oq8uu")
 shape = SubResource("ConvexPolygonShape3D_njov2")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Map" unique_id=380019253]
-transform = Transform3D(-0.02, 0, -1.7484555e-09, 0, 1, 0, 1.7484555e-09, 0, -0.02, 0.15053976, 0.9751084, 0.041992206)
+transform = Transform3D(2.6226832e-09, 0, -0.02, 0, 1, 0, 0.02, 0, 2.6226832e-09, -0.034346227, 0.9751084, 0.25726092)
 mesh = SubResource("PrismMesh_oq8uu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map/MeshInstance3D3" unique_id=457548239]
@@ -93,7 +83,7 @@ shape = SubResource("ConvexPolygonShape3D_aq4fw")
 shape = SubResource("ConcavePolygonShape3D_rvu7i")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Map" unique_id=538812687]
-transform = Transform3D(0.02, 0, 0, 0, 1, 0, 0, 0, 0.02, 0.03141976, 2.8090296, -0.1499614)
+transform = Transform3D(0.02, 0, 0, 0, 1, 0, 0, 0, 0.02, 0.39982033, 2.8090296, -0.39072362)
 mesh = SubResource("BoxMesh_m6x7o")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map/MeshInstance3D2" unique_id=1222254521]
@@ -116,57 +106,11 @@ transform = Transform3D(0.90258527, -0.3107258, -0.29797536, 0, -0.69214326, 0.7
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=729284630]
 environment = SubResource("Environment_rvu7i")
 
-[node name="Car" type="VehicleBody3D" parent="." unique_id=340194249]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0492685, 0)
-script = ExtResource("2_njov2")
+[node name="Car" parent="." unique_id=1675653068 instance=ExtResource("2_njov2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.359891, 1.049268, -21.207169)
 
-[node name="car_body" type="MeshInstance3D" parent="Car" unique_id=1366649594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08615112, 0)
-mesh = SubResource("BoxMesh_n8i4t")
+[node name="Slingshot" type="Node3D" parent="." unique_id=683447158]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.3755746, -23.128775)
+script = ExtResource("4_rig")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Car" unique_id=624250013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08615112, 0)
-shape = SubResource("ConvexPolygonShape3D_2au82")
-
-[node name="Front_Left" type="VehicleWheel3D" parent="Car" unique_id=687665652]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6274519, -0.21172214, 0.6697893)
-use_as_steering = true
-suspension_stiffness = 50.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/Front_Left" unique_id=1201227865]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_osore")
-
-[node name="Front_Right" type="VehicleWheel3D" parent="Car" unique_id=451077719]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6070969, -0.2057581, 0.6668074)
-use_as_steering = true
-suspension_stiffness = 50.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/Front_Right" unique_id=1712885168]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_osore")
-
-[node name="Back_Left" type="VehicleWheel3D" parent="Car" unique_id=1754060114]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6274519, -0.18786597, -0.68105745)
-use_as_traction = true
-suspension_stiffness = 50.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/Back_Left" unique_id=699403347]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_osore")
-
-[node name="Back_Right" type="VehicleWheel3D" parent="Car" unique_id=1146110825]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6070968, -0.18786597, -0.68105745)
-use_as_traction = true
-suspension_stiffness = 50.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/Back_Right" unique_id=144693515]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("CylinderMesh_osore")
-
-[node name="Camera" type="SpringArm3D" parent="Car" unique_id=322898079]
-transform = Transform3D(-1, 2.9326108e-08, -8.2357275e-08, 0, 0.94205743, 0.33545157, 8.742278e-08, 0.33545157, -0.94205743, 0, 0.23932934, 0.79386973)
-spring_length = 5.0
-
-[node name="Camera3D" type="Camera3D" parent="Car/Camera" unique_id=867787030]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+[node name="slingshot" parent="Slingshot" unique_id=417298633 instance=ExtResource("3_sling")]
